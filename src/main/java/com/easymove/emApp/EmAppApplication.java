@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages= "com.easymove.emApp.repository")
 @SpringBootApplication
 public class EmAppApplication {
-	
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmAppApplication.class, args);

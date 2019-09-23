@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.easymove.emApp.model.Area;
 import com.easymove.emApp.model.City;
+import com.easymove.emApp.model.College;
+import com.easymove.emApp.model.CollegeAndArea;
 import com.easymove.emApp.model.Header;
 import com.easymove.emApp.model.Hospital;
+import com.easymove.emApp.model.HospitalAndArea;
 import com.easymove.emApp.repository.AreaRepository;
 import com.easymove.emApp.repository.CityRepository;
+import com.easymove.emApp.repository.CollegeRepository;
 import com.easymove.emApp.repository.HeaderRepository;
 import com.easymove.emApp.repository.HospitalRepository;
 
@@ -38,6 +42,9 @@ public class Controller {
 	    
 	    @Autowired
 	    HospitalRepository hospitalRepository;
+	    
+	    @Autowired
+	    CollegeRepository collegeRepository;
 	    
 	public Controller() {
 		// TODO Auto-generated constructor stub
@@ -132,5 +139,35 @@ public class Controller {
 			)
 	public ResponseEntity<Iterable<Header>> findAllHeaderByName(@RequestParam("headerName") String headerName){
 		return new ResponseEntity<Iterable<Header>>(headerRepository.findAllHeaderByHeaderName(headerName), HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value = "/findallHospitalAndArea",
+			method = RequestMethod.GET,
+			produces = { MimeTypeUtils.APPLICATION_JSON_VALUE },
+			headers = "Accept=application/json"
+			)
+	public ResponseEntity<Iterable<HospitalAndArea>> findAllHospitalAndArea(@RequestParam("spec") String spec, @RequestParam("cityName") String cityName){
+		return new ResponseEntity<Iterable<HospitalAndArea>>(hospitalRepository.findAllHospitalAndArea(spec, cityName), HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value = "/findallCollegeByCityId",
+			method = RequestMethod.GET,
+			produces = { MimeTypeUtils.APPLICATION_JSON_VALUE },
+			headers = "Accept=application/json"
+			)
+	public ResponseEntity<Iterable<College>> findAllCollegeByCity(@RequestParam("cityName") String cityName){
+		return new ResponseEntity<Iterable<College>>(collegeRepository.findAllCollegeByCityId(cityName), HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value = "/findallCollegeAndArea",
+			method = RequestMethod.GET,
+			produces = { MimeTypeUtils.APPLICATION_JSON_VALUE },
+			headers = "Accept=application/json"
+			)
+	public ResponseEntity<Iterable<CollegeAndArea>> findAllCollegeAndArea(@RequestParam("type") String type, @RequestParam("cityName") String cityName){
+		return new ResponseEntity<Iterable<CollegeAndArea>>(collegeRepository.findCollegeAndArea(type, cityName), HttpStatus.OK);
 	}
 }

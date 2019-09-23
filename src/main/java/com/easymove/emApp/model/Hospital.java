@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
-@Table(name="Hospital", catalog="emapp")
+@Table(name="hospital", catalog="emapp")
 public class Hospital {
 	@Id
 	@Column(name = "hospital_id")
